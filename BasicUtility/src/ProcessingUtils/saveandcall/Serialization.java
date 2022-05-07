@@ -101,18 +101,18 @@ public static void info(Object ob, int offset) {
   }
 }
 
-public static String fullSerializeCallable(Object ob){out=new StringWriter();ps=new PrintWriter(out);
+public static String infoCallable(Object ob){out=new StringWriter();ps=new PrintWriter(out);
 ps.println(ob.getClass().getSimpleName());
-fullSerializeCallable(ob,0);
+infoCallable(ob,0);
 return out.toString();
 }
-public static void fullSerializeCallable(Object ob, int offset) {
+public static void infoCallable(Object ob, int offset) {
   assert offset<9;
   //check if array
   if (ob.getClass().isArray()) {
     ps.println(offset+"-a-"+ob.getClass().getSimpleName()+"-"+Array.getLength(ob));
     for (int i=0;i<Array.getLength(ob);i++) {
-    	fullSerializeCallable(Array.get(ob,i), offset+1);
+    	infoCallable(Array.get(ob,i), offset+1);
     }
   } else if (ob==null||ob instanceof Number||ob instanceof String) {
     ps.println(offset+"-f-"+ob.getClass().getSimpleName()+","+ ob);
@@ -126,7 +126,7 @@ public static void fullSerializeCallable(Object ob, int offset) {
 
         ps.println(offset+"-f-"+fields[i][0]+","+ fields[i][1]);
 
-        fullSerializeCallable(fi[i], offset+1);
+        infoCallable(fi[i], offset+1);
       }
     }
   }
